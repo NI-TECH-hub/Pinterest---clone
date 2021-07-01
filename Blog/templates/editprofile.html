@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block decorate %}
+body {
+    background: rgb(99, 39, 120)
+}
+.st {
+    font-size:5rem;
+    color:whitesmoke;
+}
+
+
+{% endblock decorate %}
+
+{% block content %} 
+
+<div class="container rounded bg-white mt-5">
+    <div class="row">
+        <div class="col-md-4 border-right" style="background-color:black;">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><h1 class="text-center mt-10 st">Edit Profile</h1>  </div>
+        </div>
+        <div class="col-md-8">
+            <div class="p-3 py-5">
+                    
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
+                        {% comment %} <button class="btn btn-warning"> {% endcomment %}     
+                            <a class="" href="{% url 'profile' %}"> Back to Profile </a>
+                        {% comment %} </button> {% endcomment %}
+                    </div>
+                </div>
+                <form action="{% url 'editprofile' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row mt-2">
+                    {% for fm1 in form1 %}
+                        <div class="col-md-6 mt-2"> {{fm1.label_tag}} {{fm1}} <br>{{fm1.errors|striptags}}</div>
+                    {% endfor %}
+                </div>
+                <div class="row mt-2">
+                    {% for fm2 in form2 %}
+                        <div class="col-md-6 mt-2"> {% if fm2. %}{% endif %}{{fm2.label_tag}} {{fm2}} <br>{{fm2.errors|striptags}}</div>
+                    {% endfor %}
+                </div>
+                <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

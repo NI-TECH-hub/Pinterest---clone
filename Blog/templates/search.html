@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block decorate %}
+.imgclass {
+    padding-left:1rem; 
+    top: 0px;
+    left: 0px;
+    transform: translateX(0px) translateY(0px);
+     width: auto;
+    height: auto;
+}
+.divclass {
+    padding-left:1.5rem; 
+    padding-top:0.5rem; 
+}
+{% endblock decorate %}
+
+
+{% block content %}
+
+<div class="row divclass ">
+
+    {% comment %}  display the search results  {% endcomment %}
+    {% for post in value %}
+
+        <div class="imgclass ">
+             <h6 class ="text-center">{{post.title}}</h6>
+            <a href="{% url 'viewimg' post.id %}">
+                <img src="{{post.photo.url}}" class="w3-hover-opacity img-fluid w3-round" style="border-radius:2rem;">
+            </a>
+            {% comment %} like the post  {% endcomment %}
+            <form id="like1" action="{% url 'likepost' 1%}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-primary btn-sm mt-1" type="submit" name='post_id' value="{{post.id}}">Like
+                    {{post.total_likes}}</button>
+            </form>
+            {% comment %}  dislike the post  {% endcomment %}
+            <form action="{% url 'likepost' 2 %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger btn-sm mt-1" type="submit" name='post_id' value="{{post.id}}">disLike
+                    {{post.total_dislikes}}</button>
+            </form>
+
+           
+        </div>
+    {% endfor %}
+
+</div>
+{% endblock content %}

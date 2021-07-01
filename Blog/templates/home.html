@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block decorate %}
+.imgclass {
+    margin-top:0.5rem;
+    padding-left:1rem; 
+    top: 0px;
+    left: 0px;
+    transform: translateX(0px) translateY(0px);
+    width: auto;
+    height: auto;
+}
+
+.divclass {
+    padding-left:1.5rem; 
+    padding-top:0.5rem; 
+}
+{% endblock decorate %}
+
+{% block content %}
+
+
+<div class="row divclass">
+
+    {% comment %}  Iterate over all the posts and diplay each  {% endcomment %}
+    {% for post in form %}
+
+        <div class="imgclass mb-2">
+            {% comment %} image link to view full details  {% endcomment %}
+            <a href="{% url 'viewimg' post.id %}">
+                <img src="{{post.photo.url}}" class="w3-hover-opacity  w3-round"  style="border-radius:2rem;">
+            </a>
+
+            
+            {% comment %} form for liking the post  {% endcomment %}
+            <form  style="float-left;" action="{% url 'likepost' 1%}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-primary btn-sm mt-1" type="submit" name='post_id' value="{{post.id}}">Like
+                    {{post.total_likes}}</button>
+            </form>
+            <button class="btn btn-warning mt-0" style="float:right;">
+                <a href="{{post.photo.url}}" download> Download </a>
+            </button> 
+
+              {% comment %} form for diliking the post  {% endcomment %}
+            <form action="{% url 'likepost' 2 %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger btn-sm mt-1" type="submit" name='post_id' value="{{post.id}}">disLike
+                    {{post.total_dislikes}}</button>
+            </form>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock content %}

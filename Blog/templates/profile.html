@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block decorate %}
+    body{
+        background: whitesmoke;
+    }
+    .ss1{
+    font-size :40px ;
+    text-transform: uppercase; 
+    font-family: 'Lucida Console', 'Courier New', monospace;
+    }
+
+    .containerss{
+        width="900%";
+        paddding-right="50rem";
+        paddding-left="50rem";
+        margin-right="auto";
+        margin-left="auto";
+    }
+    
+    #outer{
+        width:100%;
+        text-align: center;
+    }
+    .inner
+    {
+        display: inline-block;
+    }
+
+    .image_inner_container{
+       	border-radius: 50%;
+       	padding: 5px;
+        background: #833ab4; 
+        background: -webkit-linear-gradient(to bottom, #fcb045, #fd1d1d, #833ab4); 
+        background: linear-gradient(to bottom, #fcb045, #fd1d1d, #833ab4);
+       }
+    .image_inner_container img{
+       	height: 400px;
+       	width: 400px;
+       	border-radius: 50%;
+       	border: 5px solid white;
+       }
+{% endblock decorate %}
+
+
+
+{% block content %}
+
+<div class="container" >
+
+    <div class="row">
+
+        {% comment %} these will display user image  {% endcomment %}
+            {% if form.photo %}
+            <div class="container mb-5 ">
+                <div class="d-flex justify-content-center h-100">
+                    <div class="image_outer_container mt-5">
+                        <div class="green_icon"></div>
+                        <div class="image_inner_container">
+                           <a href="{{form.photo.url}}"><img src="{{form.photo.url}}" alt="no img"></a> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        {% comment %} <a href="{{form.photo.url}}" style="background-color:#ddd;" target="_blank">
+            <img  class="  mt-2 float-right" src="{{form.photo.url}}"  height="400" style =" background-color:yellow ;width :40%; border: 5px solid #555; display: block;margin-left: auto;  margin-right: auto;" alt="">
+        </a> {% endcomment %}
+
+        {% comment %} user full name and usernmae  {% endcomment %}
+        <h3 class="text-center mt-1 ss1"><u>{{user.get_full_name}}</u></h3>
+        <h4 class="text-center  "><b>@{{user.username}}</b></h4>
+        
+        {% comment %} button to display  the total user post and like  {% endcomment %}
+        <div id="outer">
+            <div class="inner"><button type="submit" class="msgBtn btn btn-info" onClick="return false;" >Posts -  <b>{{totalpost}}</b></button></div>
+            <div class="inner"><button type="submit" class="msgBtn2 btn btn-success" onClick="return false;">Likes - {{likes}}</button></div>
+            <div class="inner"><button type="submit" class="msgBtn2 btn btn-danger" onClick="return false;">Dislikes - {{dislikes}}</button></div>
+            
+        </div>
+
+    </div>  
+
+
+        {% comment %} link to edit the user Profile  {% endcomment %}
+        <button class="btn btn-warning">
+            <a class="btn btn-warning btn-sm" href="{% url 'editprofile' %}"> Edit Profile </a>
+        </button>
+
+        <button class="btn btn-danger">
+            <a class="btn btn-danger btn-sm" href="{% url 'changepassword' %}">change password </a>
+        </button>
+
+        <hr>
+
+        {% comment %} display user post  {% endcomment %}
+        <div class="row" style="background-color:#9e9e9e;">
+            {% for data in userdata %}
+                <div class="col-sm-3 px-4 mt-4">
+                    <h4 class="text-center "><b>{{data.title}}</b></h4>
+                    <a href="{% url 'viewimg' data.id %}">
+                            <img src="{{data.photo.url}}" class="w3-hover-opacity img-fluid w3-round " style="border: 5px solid #555;">
+                    </a>
+                    <button class="btn btn-primary btn-sm mt-1">Likes  {{data.total_likes}}</button> 
+                    <button class="btn btn-danger btn-sm mt-1 d-inline">Dislikes  {{data.total_dislikes}}</button> 
+                    <form action="{% url 'delete' data.id %}" method="post">
+                        {% csrf_token %}
+                        <input class="btn btn-warning mt-1"type="submit" value="Delete Post">
+                    </form>
+
+                </div>
+            {% endfor %}
+        </div>
+    
+    </div>
+{% comment %} </div> {% endcomment %}
+
+
+{% endblock content %}

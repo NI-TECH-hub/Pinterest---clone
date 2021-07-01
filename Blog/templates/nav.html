@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light " style="background-color:#fff;">
+  <div class="container-fluid "  style="background-color:#fff;">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+      aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">
+      <img src="https://i.pinimg.com/564x/2e/43/cd/2e43cd65592c892194d886fa9e1a7384.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
+    {% comment %} navbar starts  {% endcomment %}
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        {% comment %} home view  {% endcomment %}
+        <li class="nav-item">
+          <h4><a class="nav-link active mb-1" width="500px" aria-current="page" href="/">Home</a></h4>
+        </li>
+
+        {% comment %} these will show sorted data by today  {% endcomment %}
+        <li class="nav-item">
+          <h4><a class="nav-link active mb-1" width="500px" aria-current="page" href="{% url 'sortby' %}">Today</a></h4>
+        </li>
+
+      </ul>
+
+      {% comment %} this is the form to search post  {% endcomment %}
+      <form class="mt-1" style="padding-right:10rem;"  action="{% url 'search' %}" method="get">
+            {% csrf_token %}
+            <input class="form-control border-1 w3-round bg-light " style="border: 2px solid #00B4CC;" name='query' type="search" size="130" placeholder="What are you looking for ?....." > 
+        </form>
+
+
+      {% comment %} if user is login then diaplay the addpost button else do not display  {% endcomment %}
+      {% if request.user.is_authenticated %}
+
+      <button  class = "btn btn-warning btn-sm "  style="margin-right:8px;" >
+        <a class = "btn btn-warning btn-sm " href="{% url 'addpost' %}" > Add Post </a> 
+      </button>
+        
+
+        {% comment %} also show hime route to his profile page  {% endcomment %}
+      <div class="dropdown" style="margin-right:20px;">
+          {% comment %} <img src="{{data.photo.url}}" alt=" not found"> {% endcomment %}
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{user.get_full_name}}
+          </button>
+
+          {% comment %} dropdowns {% endcomment %}
+          <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item"  href="{% url 'profile' %}">Profile</a>
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+            <a class="dropdown-item" href="{% url 'contact' %}">Contact us</a>
+          </div>
+      </div>
+
+      {% else %}
+        {% comment %} if user is not login then diplay the login button onlye  {% endcomment %}
+        <div class="float-left">
+          <h4><a class="dropdown-item" href="{% url 'login' %}">Login</a></h4>
+        </div>
+
+      {% endif %}
+
+      
+    </div>
+  </div>
+</nav>
