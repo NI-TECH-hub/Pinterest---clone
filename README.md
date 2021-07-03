@@ -1,7 +1,7 @@
 
-# Pinterest -- clone 
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?size=35&center=true&width=600&lines=Welcome+to+Pinterest-Clone)](https://git.io/typing-svg)
 
-It is project based on pinterest clone using Django which is web framework of python .
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=F70491&size=35&center=true&width=600&lines=Build+using+Django-Framework)](https://git.io/typing-svg)
 
 ## Installation
 
