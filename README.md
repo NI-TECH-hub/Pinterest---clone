@@ -42,4 +42,8 @@ ___
   - Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 
+<<<<<<< HEAD
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?color=B60755&size=30&center=true&vCenter=true&width=500&lines=Thank+You+for+visiting+)](https://git.io/typing-svg)
+=======
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=B60755&size=30&center=true&vCenter=true&width=500&lines=Thank+You+for+visiting+)](https://git.io/typing-svg)
+>>>>>>> fa0cf27ba8b862fb8291ae57faeeeb1bf8f35fdb
