@@ -83,13 +83,11 @@
 
 
         {% comment %} link to edit the user Profile  {% endcomment %}
-        <button class="btn btn-warning">
-            <a class="btn btn-warning btn-sm" href="{% url 'editprofile' %}"> Edit Profile </a>
-        </button>
+       
+        <a class="btn btn-warning btn-sm" href="{% url 'editprofile' %}"> Edit Profile </a>
 
-        <button class="btn btn-danger">
-            <a class="btn btn-danger btn-sm" href="{% url 'changepassword' %}">change password </a>
-        </button>
+
+        <a class="btn btn-danger btn-sm" href="{% url 'changepassword' %}">change password </a>
 
         <hr>
 

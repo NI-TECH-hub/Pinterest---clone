@@ -167,12 +167,15 @@ def viewimage(request,id):
     form = AddPost.objects.get(pk=id)
     comments = comment.objects.filter(post = form)
     
-    if request.method == 'POST':
-        comment_form = commentform(request.POST or None)
-        if comment_form.is_valid():
-            content = request.POST.get('content')
-            com = comment.objects.create(post=form ,user = request.user,content=content)
-            com.save()
+    if request.method == 'POST' :
+        if request.user.is_authenticated:
+            comment_form = commentform(request.POST or None)
+            if comment_form.is_valid():
+                content = request.POST.get('content')
+                com = comment.objects.create(post=form ,user = request.user,content=content)
+                com.save()
+        else :
+            return HttpResponseRedirect('/login')
 
     else:
         comment_form = commentform()

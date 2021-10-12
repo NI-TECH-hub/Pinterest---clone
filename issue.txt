@@ -1,0 +1,4 @@
+-- view user profile 
+-- calender in edit profile 
+-- search.html to be changed 
+-- like and dislike urls 
